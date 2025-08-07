@@ -4,6 +4,19 @@ from config import AUTHORIZATION, DELAY
 
 # === DATA ===
 
+DUNGEON_EXPLORES = [
+    {
+        "dungeon_id": "01K217EHBEJBYT81YDE187EC8D",  # bisa diganti
+        "hero_id": "01K1Y8YY9K815SZMYCYVZ1WRY5"      # bisa diganti
+    },
+    {
+        "dungeon_id": "01K217EHBEZMYFM6ZA65TY6S3J",   # contoh tambahan
+        "hero_id": "01K1Y8VJYY1TJQZGHWC9BY77AF"
+    }
+    # Tambahkan lebih banyak kalau perlu...
+]
+
+
 UPGRADE_BUILDINGS = [
     {"id": "01K0C8V3PDHX6YADAX0J775HX3", "target": 4},
     {"id": "01K0CA1FMEC56B1E3TVJRP191X", "target": 2}
@@ -132,6 +145,17 @@ def claim_building(building_id):
         print(f"[⚠️] Gagal klaim hasil bangunan {building_id}: {e}")
 
 
+def explore_dungeon(dungeon_id, hero_id):
+    url = f"https://play.pixiland.app/api/v1/pve/dungeon/{dungeon_id}/explore"
+    payload = {"hero_id": hero_id}
+    try:
+        response = requests.put(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"🗺️  Eksplor dungeon {dungeon_id} dengan hero {hero_id} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal eksplor dungeon {dungeon_id}: {e}")
+
+
+
 # === LOOP UTAMA ===
 
 if __name__ == "__main__":
@@ -162,6 +186,12 @@ if __name__ == "__main__":
         for bid in CLAIM_BUILDING_IDS:
             claim_building(bid)
             time.sleep(DELAY)
+
+        print("\n🗺️ Menjalankan eksplorasi dungeon...")
+        for entry in DUNGEON_EXPLORES:
+            explore_dungeon(entry["dungeon_id"], entry["hero_id"])
+            time.sleep(DELAY)  # pakai delay agar tidak terlalu cepat
+
 
         print("\n✅ Eksekusi selesai! Menunggu 1 jam...\n")
         time.sleep(3600)
