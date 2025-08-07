@@ -95,26 +95,42 @@ HEADERS = {
 def upgrade_building(building_id, target_level):
     url = "https://play.pixiland.app/api/v1/building/upgrade"
     payload = {"id": building_id, "kind": "level", "target": target_level}
-    response = requests.put(url, headers=HEADERS, json=payload)
-    print(f"🔧 Upgrade {building_id} -> Lv{target_level} | Status: {response.status_code}")
+    try:
+        response = requests.put(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"🔧 Upgrade {building_id} -> Lv{target_level} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal upgrade {building_id}: {e}")
+
 
 def complete_quest(quest_id):
     url = "https://play.pixiland.app/api/v1/quests/complete"
     payload = {"quest_id": quest_id}
-    response = requests.post(url, headers=HEADERS, json=payload)
-    print(f"✅ Complete Quest {quest_id} | Status: {response.status_code}")
+    try:
+        response = requests.post(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"✅ Complete Quest {quest_id} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal complete quest {quest_id}: {e}")
+
 
 def claim_quest(quest_id):
     url = "https://play.pixiland.app/api/v1/quests/rewards/claim"
     payload = {"quest_id": quest_id}
-    response = requests.post(url, headers=HEADERS, json=payload)
-    print(f"🎁 Claim Reward {quest_id} | Status: {response.status_code}")
+    try:
+        response = requests.post(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"🎁 Claim Reward {quest_id} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal klaim reward quest {quest_id}: {e}")
+
 
 def claim_building(building_id):
     url = "https://play.pixiland.app/api/v1/building/claim"
     payload = {"id": building_id}
-    response = requests.put(url, headers=HEADERS, json=payload)
-    print(f"🏗️ Klaim hasil bangunan {building_id} | Status: {response.status_code}")
+    try:
+        response = requests.put(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"🏗️ Klaim hasil bangunan {building_id} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal klaim hasil bangunan {building_id}: {e}")
+
 
 # === LOOP UTAMA ===
 
