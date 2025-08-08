@@ -154,6 +154,15 @@ def explore_dungeon(dungeon_id, hero_id):
     except Exception as e:
         print(f"[⚠️] Gagal eksplor dungeon {dungeon_id}: {e}")
 
+def claim_dungeon(dungeon_id):
+    url = f"https://play.pixiland.app/api/v1/pve/dungeon/{dungeon_id}/claim"
+    payload = {}
+    try:
+        response = requests.put(url, headers=HEADERS, json=payload, timeout=10)
+        print(f"🎯 Klaim dungeon {dungeon_id} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"[⚠️] Gagal klaim dungeon {dungeon_id}: {e}")
+
 
 
 # === LOOP UTAMA ===
@@ -191,6 +200,11 @@ if __name__ == "__main__":
         for entry in DUNGEON_EXPLORES:
             explore_dungeon(entry["dungeon_id"], entry["hero_id"])
             time.sleep(DELAY)  # pakai delay agar tidak terlalu cepat
+
+        print("\n🎯 Klaim dungeon setelah eksplorasi...")
+        for entry in DUNGEON_EXPLORES:
+            claim_dungeon(entry["dungeon_id"])
+            time.sleep(DELAY)
 
 
         print("\n✅ Eksekusi selesai! Menunggu 1 jam...\n")
