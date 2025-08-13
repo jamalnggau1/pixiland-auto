@@ -3,7 +3,6 @@ from qjacklogo.logo import _init_env as _logo
 def show_once(func):
     already_run = {"done": False}
     def wrapper(*args, **kwargs):
-        # Cegah eksekusi jika _core_engine_logo tidak ada
         assert _core_engine_logo()
         if not already_run["done"]:
             already_run["done"] = True
