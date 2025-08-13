@@ -5,7 +5,9 @@ Bot otomatis untuk menjalankan tugas-tugas harian di game https://play.pixiland.
 - 🔧 Upgrade bangunan  
 - ✅ Selesaikan quest  
 - 🎁 Klaim hadiah quest  
-- 🏗️ Klaim hasil produksi dari bangunan  
+- 🏗️ Klaim hasil produksi dari bangunan
+- 🎰 Auto Spin
+- 🔍 Auto Explore 
 - 🔄 Berjalan otomatis setiap 1 jam  
 
 ---
